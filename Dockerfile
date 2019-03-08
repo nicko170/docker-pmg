@@ -5,12 +5,12 @@ RUN	apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr &
 
 RUN	set -x 
 
+RUN     wget http://download.proxmox.com/debian/proxmox-ve-release-5.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-5.x.gpg
+
 RUN	echo "deb http://download.proxmox.com/debian/pmg stretch pmg-no-subscription" > /etc/apt/sources.list.d/pmg.list
 
 RUN	apt-get update \
-	&& apt-get install -y proxmox-mailgateway \
+	&& apt-get install -y proxmox-mailgateway postfix \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN	echo 'type = "console";' > /etc/rspamd/override.d/logging.inc \
-	&& echo 'bind_socket = "*:11334";' > /etc/rspamd/override.d/worker-controller.inc \
-	&& echo 'pidfile = false;' > /etc/rspamd/override.d/options.inc
+RUN echo "root:PMG!" | chpasswd
