@@ -5,7 +5,7 @@ RUN	apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr &
 
 RUN	set -x 
 
-RUN     wget http://download.proxmox.com/debian/proxmox-ve-release-5.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-5.x.gpg
+RUN     curl http://download.proxmox.com/debian/proxmox-ve-release-5.x.gpg > /etc/apt/trusted.gpg.d/proxmox-ve-release-5.x.gpg
 
 RUN	echo "deb http://download.proxmox.com/debian/pmg stretch pmg-no-subscription" > /etc/apt/sources.list.d/pmg.list
 
